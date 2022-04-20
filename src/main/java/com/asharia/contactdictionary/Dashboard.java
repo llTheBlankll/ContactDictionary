@@ -294,6 +294,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         if (!checkAllInput().equals("good")) {
             JOptionPane.showMessageDialog(rootPane, "Error: Please fill all input required.", "Requirements not met", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         try {
@@ -366,7 +367,19 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        
+       DefaultTableModel model = (DefaultTableModel) contactTable.getModel();
+       String contact_phone = model.getValueAt(contactTable.getSelectedRow(), 0).toString();
+       String contact_name = model.getValueAt(contactTable.getSelectedRow(), 1).toString();
+       String contact_email = model.getValueAt(contactTable.getSelectedRow(), 2).toString();
+       String contact_alias = model.getValueAt(contactTable.getSelectedRow(), 3).toString();
+       
+       UpdateForm updateForm = new UpdateForm(contact_phone);
+       updateForm.phone_number = contact_phone;
+       updateForm.name = contact_name;
+       updateForm.email = contact_email;
+       updateForm.alias = contact_alias;
+       updateForm.setVisible(true);
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void menu_contactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contactsActionPerformed
@@ -381,29 +394,6 @@ public class Dashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
