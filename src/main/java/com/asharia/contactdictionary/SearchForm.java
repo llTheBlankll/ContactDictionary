@@ -6,6 +6,8 @@
 package com.asharia.contactdictionary;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,6 +78,12 @@ public class SearchForm extends javax.swing.JFrame {
             contactTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        txt_searchBy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_searchByKeyPressed(evt);
+            }
+        });
+
         cmb_sortBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phone Number", "Name", "Email", "Alias" }));
 
         btn_search.setText("Search");
@@ -133,9 +141,9 @@ public class SearchForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+    private void performSearch() {
         String value = cmb_sortBy.getSelectedItem().toString();
-        
+
         try (Connection con = connection.getConnection()) {
             PreparedStatement ps;
             switch (value) {
@@ -159,25 +167,35 @@ public class SearchForm extends javax.swing.JFrame {
                     ps = con.prepareStatement("SELECT * FROM contacts");
                     break;
             }
-            
+
             try (ResultSet rs = ps.executeQuery()) {
                 DefaultTableModel model = (DefaultTableModel) contactTable.getModel();
-                
+
                 model.setRowCount(0);
-                
+
                 while (rs.next()) {
                     model.addRow(new String[]{rs.getString("contact_phone"), rs.getString("contact_name"), rs.getString("contact_email"), rs.getString("contact_alias")});
                 }
-                
+
                 con.close();
                 rs.close();
             }
             ps.close();
-            
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        performSearch();
     }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void txt_searchByKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchByKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            performSearch();
+        }
+    }//GEN-LAST:event_txt_searchByKeyPressed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,8 @@
 package com.asharia.contactdictionary;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,11 +73,21 @@ public class Dashboard extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(255, 255, 255));
 
         txt_email.setToolTipText("Email address (Optional)");
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_emailKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabel5.setText("Alias:");
 
         txt_alias.setToolTipText("Alias of a person (Optional)");
+        txt_alias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_aliasKeyPressed(evt);
+            }
+        });
 
         btn_save.setText("Save");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -132,11 +144,21 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2.setText("Phone Number:");
 
         txt_phoneNumber.setToolTipText("Phone number (e.g: 9998216556)");
+        txt_phoneNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_phoneNumberKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabel3.setText("Name:");
 
         txt_name.setToolTipText("Name of the person.");
+        txt_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nameKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabel4.setText("Email:");
@@ -206,11 +228,6 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         menu_contacts.setText("Contacts");
-        menu_contacts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_contactsActionPerformed(evt);
-            }
-        });
 
         menuItem_search.setText("Search Contact");
         menuItem_search.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +308,7 @@ public class Dashboard extends javax.swing.JFrame {
         return false;
     }
 
-    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+    private void saveContact() {
         if (!checkAllInput().equals("good")) {
             JOptionPane.showMessageDialog(rootPane, "Error: Please fill all input required.", "Requirements not met", JOptionPane.ERROR_MESSAGE);
             return;
@@ -325,6 +342,10 @@ public class Dashboard extends javax.swing.JFrame {
             logger.error(ex.getMessage());
             System.exit(ex.hashCode());
         }
+    }
+
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        saveContact();
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
@@ -382,13 +403,33 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void menu_contactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contactsActionPerformed
-        
-    }//GEN-LAST:event_menu_contactsActionPerformed
-
     private void menuItem_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_searchActionPerformed
         new SearchForm().setVisible(true);
     }//GEN-LAST:event_menuItem_searchActionPerformed
+
+    private void txt_phoneNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneNumberKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveContact();
+        }
+    }//GEN-LAST:event_txt_phoneNumberKeyPressed
+
+    private void txt_nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveContact();
+        }
+    }//GEN-LAST:event_txt_nameKeyPressed
+
+    private void txt_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveContact();
+        }
+    }//GEN-LAST:event_txt_emailKeyPressed
+
+    private void txt_aliasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_aliasKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveContact();
+        }
+    }//GEN-LAST:event_txt_aliasKeyPressed
 
     /**
      * @param args the command line arguments

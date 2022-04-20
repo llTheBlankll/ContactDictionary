@@ -147,6 +147,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Email address (Optional)"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_emailKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -160,6 +163,10 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Alias of a person (Optional)"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_aliasKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_aliasKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_save">
           <Properties>
@@ -239,6 +246,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Phone number (e.g: 9998216556)"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_phoneNumberKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -252,6 +262,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Name of the person."/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nameKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
